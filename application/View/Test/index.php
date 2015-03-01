@@ -1,0 +1,1 @@
+<h1 style="color: blue;">This is a test controller, index action</h1>
