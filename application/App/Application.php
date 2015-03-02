@@ -15,40 +15,25 @@ class Application {
     private $action = '';
     private $param = array();
 
-    public function __construct($controller = "", $action = "") {
-        $setController = $controler;
-        $setAction = $action;
-        $this->url = rtrim(filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL), "/");
-        if( isset($this->url ) && filter_var($this->url)){
-            if($this->explodeUrl()){
-                
-                if(class_exists( $this->controllerName )){
-                    //echo $this->action;
-                    //echo '<br>' . 'Controller\\' . MAIN_CONTROLLER . 'Controller';
-                    $this->controller = new $this->controllerName($this->controllerTitle, $this->action);
-                    if(method_exists($this->controller, $this->action)){
-                        
-                        call_user_func_array(array($this->controller, $this->action), $this->param);
-                        
-                    }
-                    else if(method_exists($this->controller, 'indexAction')){
-                        $this->controller->indexAction();
-                    }
-                    else{
-                        echo "error";
-                    }
-                }
-            }
-        }else if(!$setController){
+    public function __construct($controller = "", $action = "", $param = "") {
+        $setController = ucfirst(strtolower($controller));
+        $setAction = strtolower($action) . "Action";
+        $setParam = $param;
+        if ($setController) {
             $this->controllerTitle = $setController;
             $this->controllerName = 'Controller\\' . $setController . 'Controller';
-            
-        }else{
-            $this->controllerTitle = MAIN_CONTROLLER;
-            $this->controllerName = 'Controller\\' . MAIN_CONTROLLER . 'Controller';
-            $this->controller = new $this->controllerName($this->controllerTitle, 'index');
-            $this->controller->indexAction();
+            $this->action = $setAction;
+            $this->param[] = $setParam;
+        } else {
+            $this->url = rtrim(filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL), "/");
+            if (isset($this->url) && filter_var($this->url)) {
+                $this->explodeUrl();
+            } else {
+                $this->controllerTitle = MAIN_CONTROLLER;
+                $this->controllerName = 'Controller\\' . MAIN_CONTROLLER . 'Controller';
+            }
         }
+        $this->callController();
     }
     
     private function explodeUrl(){
@@ -75,6 +60,21 @@ class Application {
         }
         else{
             return false;
+        }
+    }
+    
+    private function callController(){
+        if (class_exists($this->controllerName)) {
+            //echo $this->action;
+            //echo '<br>' . 'Controller\\' . MAIN_CONTROLLER . 'Controller';
+            $this->controller = new $this->controllerName($this->controllerTitle, $this->action);
+            if (method_exists($this->controller, $this->action)) {
+                call_user_func_array(array($this->controller, $this->action), $this->param);
+            } else if (method_exists($this->controller, 'indexAction')) {
+                call_user_func_array(array($this->controller, 'indexAction'), $this->param);
+            } else {
+                echo "error";
+            }
         }
     }
 

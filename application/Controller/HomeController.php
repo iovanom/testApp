@@ -15,10 +15,4 @@ class HomeController extends App\Controller{
         $this->view->viewBag['msg'] = "Our contacts ...";
         $this->render();
     }
-    
-    public function loginAction(){
-        
-        $this->view->viewBag['msg'] = "Login";
-        $this->render();
-    }
 }
