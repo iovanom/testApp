@@ -1,0 +1,31 @@
+
+/* 
+    Created on : Mar 1, 2015, 10:42:05 PM
+    Author     : ivanmajeru
+*/
+
+#wraper {
+    width: 750px;
+    margin: 25px auto 5px;
+}
+
+h1 {
+    text-align: center;
+    
+}
+
+h2 {
+    text-align: center;
+    color: green;
+}
+
+.login-form {
+    
+    padding: 25px 5px 25px 250px;
+}
+
+.content-form {
+    
+    width: 250px;
+    margin: 5px auto;
+}

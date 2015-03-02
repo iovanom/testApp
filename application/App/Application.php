@@ -15,7 +15,9 @@ class Application {
     private $action = '';
     private $param = array();
 
-    public function __construct() {
+    public function __construct($controller = "", $action = "") {
+        $setController = $controler;
+        $setAction = $action;
         $this->url = rtrim(filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL), "/");
         if( isset($this->url ) && filter_var($this->url)){
             if($this->explodeUrl()){
@@ -37,6 +39,9 @@ class Application {
                     }
                 }
             }
+        }else if(!$setController){
+            $this->controllerTitle = $setController;
+            $this->controllerName = 'Controller\\' . $setController . 'Controller';
             
         }else{
             $this->controllerTitle = MAIN_CONTROLLER;
