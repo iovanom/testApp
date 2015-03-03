@@ -1,6 +1,6 @@
 <h2>Регистрация</h2>
 <div class="content-form">
-    <form action="/user" method="post">
+    <form action="/user/registre" method="post">
         <div class="form-group">
             <label for="login">Логин</label>
             <input type="text" class="form-control" id="login" name="login" placeholder="Ваш логин" required="required">

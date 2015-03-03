@@ -14,3 +14,6 @@ $loader->register();
 
 $loader = new SplClassLoader('View', 'application');
 $loader->register();
+
+$loader = new SplClassLoader('Model', 'application');
+$loader->register();

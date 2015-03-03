@@ -5,8 +5,8 @@ use App;
 class HomeController extends App\Controller{
     
     
-    public function indexAction(){
-        
+    public function indexAction($msg=''){
+        $this->view->viewBag['msg'] = $msg;
         $this->render();
         
     }
