@@ -7,6 +7,7 @@ class HomeController extends App\Controller{
     
     public function indexAction($msg=''){
         $this->view->viewBag['msg'] = $msg;
+        //phpinfo();
         $this->render();
         
     }

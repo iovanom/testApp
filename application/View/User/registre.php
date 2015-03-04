@@ -23,15 +23,15 @@
         </div>
         <div class="form-group">
             <label for="email">е-маил</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Ваш е-маил" >
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ваш е-маил">
         </div>
         <div class="form-group">
             <label for="phone">Телефон</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="Ваш Телефон" >
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Ваш Телефон">
         </div>
         <div class="form-group">
             <label for="birdthday">День рождение</label>
-            <input type="date" class="form-control" id="birdthday" name="birdthday" placeholder="День рождение" >
+            <input type="date" class="form-control" id="birdthday" name="birdthday" placeholder="dd/mm/yyyy">
         </div>
         
         <input type="hidden" name="userReg" value="true" />

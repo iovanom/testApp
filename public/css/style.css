@@ -20,12 +20,26 @@ h2 {
 }
 
 .login-form {
-    
-    padding: 25px 5px 25px 250px;
+    width: 250px;
+    margin: 25px;
 }
 
 .content-form {
     
     width: 250px;
     margin: 5px auto;
+}
+
+.container {
+    width: 100%;
+}
+
+.content {
+    width: 75%;
+    display: block;
+    float: left;
+}
+.sidebar{
+    width: 24%;
+    float: right;
 }

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 define('THE_PATH', __DIR__);
 
 //load the configuration of application

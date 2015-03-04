@@ -19,7 +19,7 @@ class Controller {
     
     public function render($model = null){
         
-        if(!$model)
+        if($model)
             $this->view->model = $model;
         $this->view->renderTemplate();
         //var_dump($this->view);
