@@ -53,8 +53,12 @@ class UserController extends App\Controller
             $iduser = filter_input(INPUT_POST, "iduser");
             $param = filter_input(INPUT_POST, "name");
             $val = filter_input(INPUT_POST, "value");
+            $this->user = new \Model\UserModel();
             $this->user->update($iduser, $param, $val);
-            header("Location: /user");
+            if($param == 'password')
+                echo '*******';
+            else 
+                echo $val;
             exit();
          } 
     }

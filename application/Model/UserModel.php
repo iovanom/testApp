@@ -68,14 +68,20 @@ class UserModel{
     
     public function update($id, $name, $value){
         $this->connectDB();
-        $idUser = "'" . $this->conn->real_escape_string($id) . "'";
-        $name = "'" . $this->conn->real_escape_string($name) . "'";
-        $value = "'" . $this->conn->real_escape_string($value) . "'";
+        $idUser = $id;
+        if($name == 'password'){
+            $value = "'" . md5($value) . "'";
+        }else if($name == 'birdthday'){
+            $value = strtotime($value);
+        }else{
+            $value = "'" . $this->conn->real_escape_string($value) . "'";
+        }
         $sql = "SELECT $name FROM users WHERE idusers = $id";
         $result = $this->conn->query($sql);
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
             $oldValue = $row[$name];
+            
         } else {
             return FALSE;
         }

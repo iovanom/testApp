@@ -26,7 +26,7 @@ class HistoryModel {
         $this->colomChanged = "'" . $this->conn->real_escape_string($this->colomChanged) . "'";
         $this->oldValue = "'" . $this->conn->real_escape_string($this->oldValue) . "'";
         $this->newValue = "'" . $this->conn->real_escape_string($this->newValue) . "'";
-        $sql = "INSERT INTO historyChanged(userId, date, colomChanged, oldValue, newValue) "
+        $sql = "INSERT INTO historyChanges(userId, date, colomChanged, oldValue, newValue) "
                 . "VALUE($this->userId, $this->date, $this->colomChanged, $this->oldValue, $this->newValue )";
         if ($this->conn->query($sql) === false) {
             trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $this->conn->error, E_USER_ERROR);

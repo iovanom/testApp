@@ -1,5 +1,5 @@
 
-<h2>User Page</h2>
+<h2><a href="/user">User Page</a></h2>
 
 <div class="container">
     <div class="content">
@@ -43,7 +43,13 @@
 <script>
     function showForm(id, type)
     {
-        var content1 = "<input type="+ type +" name=" + id +" />";
+        
+        if(type === 'date')
+        {
+            var content1 = "<input type="+ type +" name=" + id +" placeholder='dd/mm/yyyy'/>";
+        }else{
+             var content1 = "<input type="+ type +" name=" + id +" />";
+        }
         var content2 = "<input type=button class='btn btn-default' value='Сохранить' onclick=update(this) />";
         document.getElementById(id).parentElement.previousSibling.innerHTML = content1;
         document.getElementById(id).parentElement.innerHTML = content2;
