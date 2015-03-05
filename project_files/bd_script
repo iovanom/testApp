@@ -1,0 +1,74 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE SCHEMA IF NOT EXISTS `testApp` DEFAULT CHARACTER SET latin1 ;
+USE `testApp` ;
+
+-- -----------------------------------------------------
+-- Table `testApp`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `testApp`.`users` (
+  `idusers` INT(11) NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(45) NOT NULL,
+  `firsName` VARCHAR(45) NOT NULL,
+  `secondName` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(45) NULL DEFAULT NULL,
+  `birdthday` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`idusers`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC),
+  UNIQUE INDEX `idusers_UNIQUE` (`idusers` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `testApp`.`files`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `testApp`.`files` (
+  `fileId` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `location` VARCHAR(250) NOT NULL,
+  `userId` INT(11) NOT NULL,
+  `deleted` TINYINT(1) NOT NULL,
+  `url` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`fileId`),
+  INDEX `fk_files_users_idx` (`userId` ASC),
+  CONSTRAINT `fk_files_users`
+    FOREIGN KEY (`userId`)
+    REFERENCES `testApp`.`users` (`idusers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `testApp`.`historyChanges`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `testApp`.`historyChanges` (
+  `idChange` INT(11) NOT NULL AUTO_INCREMENT,
+  `userId` INT(11) NOT NULL,
+  `date` INT(11) NOT NULL,
+  `colomChanged` VARCHAR(45) NOT NULL,
+  `oldValue` VARCHAR(45) NOT NULL,
+  `newValue` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idChange`),
+  INDEX `fk_historyChanges_users1_idx` (`userId` ASC),
+  CONSTRAINT `fk_historyChanges_users1`
+    FOREIGN KEY (`userId`)
+    REFERENCES `testApp`.`users` (`idusers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 22
+DEFAULT CHARACTER SET = latin1;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
