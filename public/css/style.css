@@ -5,7 +5,7 @@
 */
 
 #wraper {
-    width: 750px;
+    width: 1000px;
     margin: 25px auto 5px;
 }
 
@@ -35,11 +35,15 @@ h2 {
 }
 
 .content {
-    width: 75%;
+    width: 57%;
     display: block;
     float: left;
 }
 .sidebar{
-    width: 24%;
+    width: 42%;
     float: right;
+}
+
+#file{
+    margin: 5px 25px 15px;
 }

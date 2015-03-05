@@ -3,44 +3,77 @@
 
 <div class="container">
     <div class="content">
-        <h4 align="center">Загруженные файлы </h4>
+        <div class="panel panel-default">
+            <div class="panel-heading">Загруженные файлы</div>
+            <div class="panel-body" id="files">
+
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Загрузить файл</div>
+            <div class="panel-body">
+                <form action="/user/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file"/>
+                    <input type="hidden" name="userId" value="<?= $this->model->id ?>" />
+                    <button type="submit" class="btn btn-default" >
+                        <span class="glyphicon glyphicon-open" >Загрузить</span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="sidebar">
-        <h4 align="center">Информация</h4>
-        <form action="/user/update" method="post">
-            <input type="hidden" name="userId" value="<?= $this->model->id ?>" />
-            <table class="table">
-                <tr >
-                    <td>Логин</td><td><?= $this->model->login ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="login">Изменить</a></td>
-                </tr>
-                <tr >
-                    <td>Пароль</td><td>*************</td><td><a href="#" data-type="password" onclick="showForm(this.id, this.dataset.type)" id="password">Изменить</a></td>
-                </tr>
-                <tr >
-                    <td>Имя</td><td><?= $this->model->firstName ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="firsName">Изменить</a></td>
-                </tr>
-                <tr >
-                    <td>Фамилия</td><td><?= $this->model->secondName ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="secondName">Изменить</a></td>
-                </tr>
-                <tr >
-                    <td>Телефон</td><td><?= $this->model->phone ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="phone">Изменить</a></td>
-                </tr>
-                <tr >
-                    <td>e-mail</td><td><?= $this->model->email ?></td><td><a href="#" data-type="email" onclick="showForm(this.id, this.dataset.type)" id="email">Изменить</a></td>
-                </tr>
-                <tr >
-                    <td>Дата рождения</td><td><?= $this->model->birdthday ?></td><td><a href="#" data-type="date" onclick="showForm(this.id, this.dataset.type)" id="birdthday">Изменить</a></td>
-                </tr>
-            </table>
-        </form>
-        
+
+<div class="sidebar">
+    <div class="content-sidebar">
+        <div class="panel panel-default">
+            <div class="panel-heading">Информация</div>
+            <div class="panel-body">
+                <form action="/user/update" method="post">
+                    <input type="hidden" name="userId" value="<?= $this->model->id ?>" />
+                    <table class="table">
+                        <tr >
+                            <td>Логин</td><td><?= $this->model->login ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="login">Изменить</a></td>
+                        </tr>
+                        <tr >
+                            <td>Пароль</td><td>*************</td><td><a href="#" data-type="password" onclick="showForm(this.id, this.dataset.type)" id="password">Изменить</a></td>
+                        </tr>
+                        <tr >
+                            <td>Имя</td><td><?= $this->model->firstName ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="firsName">Изменить</a></td>
+                        </tr>
+                        <tr >
+                            <td>Фамилия</td><td><?= $this->model->secondName ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="secondName">Изменить</a></td>
+                        </tr>
+                        <tr >
+                            <td>Телефон</td><td><?= $this->model->phone ?></td><td><a href="#" data-type="text" onclick="showForm(this.id, this.dataset.type)" id="phone">Изменить</a></td>
+                        </tr>
+                        <tr >
+                            <td>e-mail</td><td><?= $this->model->email ?></td><td><a href="#" data-type="email" onclick="showForm(this.id, this.dataset.type)" id="email">Изменить</a></td>
+                        </tr>
+                        <tr >
+                            <td>Дата рождения</td><td><?= $this->model->birdthday ?></td><td><a href="#" data-type="date" onclick="showForm(this.id, this.dataset.type)" id="birdthday">Изменить</a></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </div>
+
+
+
+</div>
 </div>
 
 <div>
     <a class="btn btn-primary" href="/user/logout">Выйти</a>
 </div>
 <script>
+    $(document).ready(function() {
+        $.ajax({url: "/user/files", success: function(result){
+        $("#files").html(result);
+    }});
+    });
     function showForm(id, type)
     {
         

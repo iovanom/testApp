@@ -12,6 +12,8 @@ class UserController extends App\Controller
     public $password;
     public $password2;
     public $user;
+    public $file;
+    public $files;
     
     public function indexAction(){
         $this->user = new Model\UserModel();
@@ -22,6 +24,7 @@ class UserController extends App\Controller
                 $this->password = filter_input(INPUT_POST, "password");
                     $_SESSION['user_login'] = $this->login;
                     $_SESSION['user_password'] = $this->password;
+                    $_SESSION['user_id'] = $this->user->id;
                     $this->render($this->user);
             } else {
                 $app = new App\Application("error", "index", LOGIN_DATES_ERROR); 
@@ -87,6 +90,26 @@ class UserController extends App\Controller
             }
         } else{
             $this->render();
+        }
+        
+    }
+    
+    public function uploadAction(){
+        $this->file = new \Model\FileModel();
+        if($this->file->upload()){
+            header("Location: /user");
+            exit();
+        }
+    }
+    
+    public function filesAction()
+    {
+        $this->file = new \Model\FileModel();
+        if($this->files = $this->file->getFiles()){
+            $this->view->viewBag = $this->files;
+            $this->partialRender();
+        }else{
+            echo " ";
         }
         
     }

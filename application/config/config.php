@@ -8,6 +8,8 @@ define('MAIN_TEMPLATE', '_main');
 //define the main controller
 define('MAIN_CONTROLLER', 'Home');
 
+define('UPLOAD_FILE_DIR', THE_PATH . "/public/users_files/");
+
 //messages constants
 require THE_PATH . '/application/config/msgConst.php';
 

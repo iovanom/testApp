@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Components;
+
 class UserModel{
     
     public $id;
@@ -17,7 +19,7 @@ class UserModel{
     
     
     public function createUser(){
-        $this->connectDB();
+        $this->conn = new Components\DB();
         $login = "'" . $this->conn->real_escape_string($this->login) . "'";
         $password = "'" . $this->conn->real_escape_string(md5($this->password)) . "'"; 
         $firstName = "'" . $this->conn->real_escape_string($this->firstName) . "'";
@@ -42,7 +44,7 @@ class UserModel{
     }
     
     public function loginUser($log, $pass){
-        $this->connectDB();
+        $this->conn = new Components\DB();
         $login = "'" . $this->conn->real_escape_string($log) . "'";
         $password = md5($pass);
         $sql = "SELECT * FROM users WHERE login = $login";
@@ -67,7 +69,8 @@ class UserModel{
     }
     
     public function update($id, $name, $value){
-        $this->connectDB();
+        //$this->connectDB();
+        $this->conn = new Components\DB();
         $idUser = $id;
         if($name == 'password'){
             $value = "'" . md5($value) . "'";
@@ -95,17 +98,6 @@ class UserModel{
         } else {
             $this->conn->close();
             return TRUE;
-        }
-    }
-    
-    
-    private function connectDB() {
-        $this->conn = new \mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-
-// check connection
-        if (mysqli_connect_errno()) {
-            printf("Connect failed: %s\n", mysqli_connect_error());
-            exit();
         }
     }
     

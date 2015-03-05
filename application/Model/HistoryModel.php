@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Components;
+
 class HistoryModel {
     
     public $idChange;
@@ -21,7 +23,7 @@ class HistoryModel {
     }
     
     public function create(){
-        $this->connectDB();
+        $this->conn = new Components\DB();
         $this->userId = "'" . $this->conn->real_escape_string($this->userId) . "'";
         $this->colomChanged = "'" . $this->conn->real_escape_string($this->colomChanged) . "'";
         $this->oldValue = "'" . $this->conn->real_escape_string($this->oldValue) . "'";
@@ -34,16 +36,6 @@ class HistoryModel {
             $this->idChange = $this->conn->insert_id;
             $this->conn->close();
             return true;
-        }
-    }
-    
-    private function connectDB() {
-        $this->conn = new \mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-
-// check connection
-        if (mysqli_connect_errno()) {
-            printf("Connect failed: %s\n", mysqli_connect_error());
-            exit();
         }
     }
     

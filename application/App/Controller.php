@@ -29,7 +29,7 @@ class Controller {
     
     public function partialRender($model = null){
         
-        if(!$model)
+        if($model)
             $this->view->model = $model;
         $this->view->renderContent();
     }
