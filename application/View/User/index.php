@@ -4,13 +4,16 @@
 <div class="container">
     <div class="content">
         <div class="panel panel-default">
-            <div class="panel-heading">Загруженные файлы</div>
+            <div class="panel-heading">Загруженные файлы( <?=($this->model->filesNr) ; ?> Файл(ов); Макс.<?= MAX_FILES_UPLOAD ?> )</div>
             <div class="panel-body" id="files">
 
             </div>
         </div>
 
 
+        <?php
+        if($this->model->filesNr < MAX_FILES_UPLOAD ):
+        ?>
         <div class="panel panel-default">
             <div class="panel-heading">Загрузить файл</div>
             <div class="panel-body">
@@ -23,6 +26,9 @@
                 </form>
             </div>
         </div>
+        <?php
+        endif;
+        ?>
     </div>
 
 <div class="sidebar">

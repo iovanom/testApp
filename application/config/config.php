@@ -10,6 +10,8 @@ define('MAIN_CONTROLLER', 'Home');
 
 define('UPLOAD_FILE_DIR', THE_PATH . "/public/users_files/");
 
+define('MAX_FILES_UPLOAD', '20');
+
 //messages constants
 require THE_PATH . '/application/config/msgConst.php';
 

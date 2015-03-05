@@ -15,6 +15,7 @@ class UserModel{
     public $phone;
     public $birdthday;
     public $history;
+    public $filesNr;
     private $conn;
     
     
@@ -99,6 +100,15 @@ class UserModel{
             $this->conn->close();
             return TRUE;
         }
+    }
+    
+    public function getUserFilesNr(){
+        $this->conn = new Components\DB();
+        $sql = "SELECT name FROM files WHERE userId = $this->id AND deleted = FALSE";
+        $result = $this->conn->query($sql);
+        $this->filesNr = $result->num_rows;
+        $this->conn->close();
+        
     }
     
     

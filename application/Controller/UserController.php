@@ -25,6 +25,7 @@ class UserController extends App\Controller
                     $_SESSION['user_login'] = $this->login;
                     $_SESSION['user_password'] = $this->password;
                     $_SESSION['user_id'] = $this->user->id;
+                    $this->user->getUserFilesNr();
                     $this->render($this->user);
             } else {
                 $app = new App\Application("error", "index", LOGIN_DATES_ERROR); 
@@ -32,6 +33,7 @@ class UserController extends App\Controller
             }
         }else if(isset($_SESSION['user_login']) && isset($_SESSION['user_password']) 
                 && $this->user->loginUser($_SESSION['user_login'], $_SESSION['user_password'])){
+            $this->user->getUserFilesNr();
             $this->render($this->user);
         }else{
             $app = new App\Application("User", "login"); 
@@ -112,6 +114,16 @@ class UserController extends App\Controller
             echo " ";
         }
         
+    }
+    
+    public function deleteAction($fileId){
+        $this->file = new \Model\FileModel();
+        if($this->file->delete($fileId)){
+            header("Location: /user");
+            exit();
+        }
+        $app = new App\Application("error", "index");
+        exit();
     }
 }
 
